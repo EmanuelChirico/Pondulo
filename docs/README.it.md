@@ -26,6 +26,6 @@ mostrano i contributi registrati in Git; il lavoro di squadra comprende anche
 attività svolte al di fuori di GitHub.
 
 - [README principale](../README.md): presentazione in inglese per GitHub.
-- [Architettura](ARCHITECTURE.md), [hardware](HARDWARE.md), [compilazione](BUILD.md).
+- [Architettura](ARCHITECTURE.md), [hardware](HARDWARE.md), [schema cablaggi HD](assets/pondulo-wiring-diagram.png), [compilazione](BUILD.md).
 - [Verifica](VALIDATION.md): otto eseguibili di test host superati.
 - [Testi per curriculum e profilo](PORTFOLIO.md).

@@ -4,6 +4,18 @@ The primary prototype uses three **NUCLEO-G474RE** boards. The optional price
 bench uses an ESP8266 and a separate STM32 receiver. Pin roles below come from
 the supplied sources and original notes; hardware was not available for retesting.
 
+## Complete wiring diagram
+
+<p align="center">
+  <a href="assets/pondulo-wiring-diagram.png">
+    <img src="assets/pondulo-wiring-diagram.png" alt="PONDULO complete Fritzing-style wiring diagram." width="100%">
+  </a>
+</p>
+
+<p align="center"><sub>Full-resolution Fritzing-style schematic (click the image to zoom or download).</sub></p>
+
+## Pin mapping
+
 | Function | Source | Destination / peripheral | Configuration |
 |---|---|---|---|
 | Pointer and gestures | Sensor PC10 (USART3 TX) | Display PC11 (USART3 RX) | 921600 baud, 8N1, common GND |

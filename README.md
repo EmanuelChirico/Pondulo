@@ -51,6 +51,16 @@ flowchart LR
 
 The sensor node separates ranging acquisition from pointer updates. The display node receives pointer state and gesture events, updates the interface and reads the analog weight signal. The scale node handles the load cell independently, including tare and calibration.
 
+### Wiring diagram
+
+<p align="center">
+  <a href="docs/assets/pondulo-wiring-diagram.png">
+    <img src="docs/assets/pondulo-wiring-diagram.png" alt="PONDULO complete Fritzing-style wiring diagram covering power distribution, 3x NUCLEO-G474RE boards, VL53L7CX ToF, ILI9341 display, HX711 load cell, 8-digit 74HC595 display, YX5300 MP3 + AUX audio chain, and optional ESP8266 bench." width="100%">
+  </a>
+</p>
+
+<p align="center"><sub>Complete hardware wiring diagram (click to open full resolution · 2640 × 1780 PNG).</sub></p>
+
 See [the architecture guide](docs/ARCHITECTURE.md) for protocols, thread responsibilities and implementation boundaries, and [the hardware guide](docs/HARDWARE.md) for connections.
 
 ## Source layout
