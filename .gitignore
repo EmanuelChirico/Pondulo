@@ -1,0 +1,42 @@
+# Version-control metadata and local IDE state
+.svn/
+.settings/
+.project
+.cproject
+.vscode/
+.idea/
+
+# Build products
+build/
+.build/
+**/build/
+**/.build/
+*.o
+*.d
+*.a
+*.elf
+*.hex
+*.bin
+*.map
+*.lst
+*.su
+*.gcda
+*.gcno
+core
+core.*
+
+# Local backups and credentials
+*.bak
+backup-*/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+__pycache__/
+.DS_Store
+Thumbs.db
+
+# External SDKs: retain placement instructions only
+/external/*
+!/external/README.md

@@ -1,0 +1,64 @@
+PONDULO
+======================================================================
+
+COS'E'
+----------------------------------------------------------
+Bilancia touchless per ambienti sterili: l'operatore muove la mano davanti a
+un sensore di distanza, un cursore si muove sullo schermo, e gesti o
+una sosta prolungata ("dwell") selezionano le voci di menu — Home ->
+Macelleria -> catalogo -> Bilancia -> Carrello -> Scontrino.
+
+LE TRE SCHEDE E COME COMUNICANO
+----------------------------------------------------------
+
+    [A: cursorSensor]  --USART3, 921600 baud-->  [B: DEMO7]  <--tensione DC (PA4->PA4)--  [C: bilanciaFinale]
+    sensore ToF                                   display + audio                          cella di carico
+
+- **Scheda A (cursorSensor)**: NUCLEO-G474RE + sensore ToF VL53L7CX.
+  Individua la mano, calcola posizione e gesti, li invia a Scheda B
+  come righe ASCII "$XY,..." (posizione) e "$GS,..." (gesto) via
+  USART3 a 921600 baud (PC10=TX -> Scheda B PC11=RX).
+
+- **Scheda B (DEMO7)**: NUCLEO-G474RE + display ILI9341. Riceve
+  $XY/$GS da Scheda A, disegna il cursore e pilota tutto il menu.
+  Legge anche il peso da Scheda C con una singola lettura ADC su
+  PA4 (canale 17), filtrata via software per non far ballare il
+  numero a schermo per rumore elettrico.
+
+- **Scheda C (bilanciaFinale)**: NUCLEO-G474RE + cella di carico
+  (HX711) + display 7 segmenti locale. Pesa, mostra il valore in
+  locale, e invia il peso a Scheda B come **tensione analogica**
+  diretta (0V = 0g, ~3.3V = 1000g) tramite il proprio DAC hardware
+  su PA4 -> PA4 di Scheda B, GND comune. Non e' un collegamento
+  digitale/seriale: e' una via scelta dopo vari tentativi (seriale,
+  poi PWM) che risultavano disturbati - vedi docs/REPORT.md per il
+  perche'.
+
+COME FUNZIONA L'AUDIO
+----------------------------------------------------------
+Solo Scheda B ha audio: un modulo seriale MP3 **YX5300** collegato su
+**UART5** (PC12=TX, PD2=RX, 9600 baud), pilotato da `mp3_player.c`
+dentro `ui_macelleria/`. Le tracce (numerate su una microSD nel
+modulo stesso) partono in punti precisi dell'interfaccia: un
+benvenuto quando qualcuno si avvicina alla Home, un "ding-dong"
+all'ingresso della schermata Bilancia, un beep ad ogni tasto del
+tastierino numerico, un suono alla cassa/scontrino. E' tutto pilotato
+da `mp3_play_track(SOUND_...)` chiamato nei punti giusti di
+`ui_macelleria.c` - nessuna logica audio complessa, solo comandi
+seriali al modulo che fa la riproduzione da solo.
+
+STRUTTURA DEL REPO
+----------------------------------------------------------
+    gruppo6/
+    ├── LEGGIMI.txt          
+    ├── docs/                <- PDF + REPORT.md (cronologia modifiche, con il "perche'")
+    ├── chibios2111, ugfx    <- librerie condivise (symlink)
+    └── firmware/
+        ├── menu-funzionante/
+        │   ├── cursorSensor/                        Scheda A
+        │   └── RT-STM32G474RE-NUCLEO64-GFX01M2-DEMO7/  Scheda B
+        ├── bilanciaFinale/                           Scheda C
+        └── RT-STM32G474RE-NUCLEO64-ESP8266menuonline/  (listino prezzi via web, ESP8266)
+
+Ogni cartella sotto firmware/ e' completa e autosufficiente: compilare
+con "make clean && make" prima di flashare.
