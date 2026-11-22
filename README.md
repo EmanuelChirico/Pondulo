@@ -4,6 +4,10 @@
 
 One of the three winning projects at **NISC 2026 — NeaPolis Innovation Summer Campus**, associated with **STMicroelectronics**. Developed by **Team 6**.
 
+[![Sito Ufficiale 3D PONDULO](https://img.shields.io/badge/🌐_Sito_Ufficiale_3D-pondulo.vincenzonet.it-ef3b2d?style=for-the-badge)](https://pondulo.vincenzonet.it)
+
+> **Esplora PONDULO in 3D interattivo** (modello CAD Fusion 360, vista Raggi X, fascio ToF 8×8, esploso completo dei componenti e video demo): **[pondulo.vincenzonet.it](https://pondulo.vincenzonet.it)**
+
 <p align="center">
   <img src="docs/assets/pondulo-prototype.jpg" alt="PONDULO physical prototype: red enclosure with a graphical display, sensor opening, local weight display and weighing platform." width="440">
 </p>
