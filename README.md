@@ -1,5 +1,5 @@
 # PONDULO
-
+ 
 **Touchless interface and weighing system on STM32**
 
 One of the three winning projects at **NISC 2026 — NeaPolis Innovation Summer Campus**, associated with **STMicroelectronics**. Developed by **Team 6**.
